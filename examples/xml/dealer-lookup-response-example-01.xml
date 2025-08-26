@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Party xmlns="http://www.openapplications.org/oagis/10"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.openapplications.org/oagis/10 file:/Users/jw/repos/dealer-lookup/schema/xml-schema/dealer-lookup-response.xsd">
+    <ID schemeID="GLN">ID0</ID>
+    <Name>Name0</Name>
+    <Location>
+        <Address>
+            <AddressLine>AddressLine0</AddressLine>
+            <AddressLine>AddressLine1</AddressLine>
+            <CityName>CityName0</CityName>
+            <CountrySubDivisionCode typeCode="typeCode1">CountrySubDivisionCode0</CountrySubDivisionCode>
+            <CountrySubDivisionCode typeCode="typeCode3">CountrySubDivisionCode1</CountrySubDivisionCode>
+            <CountryCode>CountryCode0</CountryCode>
+            <PostalCode>PostalCode0</PostalCode>
+        </Address>
+    </Location>
+    <Classification>
+        <CodeListValue>
+            <Code>Code0</Code>
+            <Definition>Definition0</Definition>
+        </CodeListValue>
+        <Reason>Reason0</Reason>
+    </Classification>
+    <Classification>
+        <CodeListValue>
+            <Code>Code1</Code>
+            <Definition>Definition1</Definition>
+        </CodeListValue>
+        <Reason>Reason1</Reason>
+    </Classification>
+</Party>

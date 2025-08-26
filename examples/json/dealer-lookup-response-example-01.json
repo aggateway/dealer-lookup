@@ -1,0 +1,37 @@
+{
+    "party": [
+        {
+            "id": {
+                "content": "1100020670975",
+                "schemeId": "GLN"
+            },
+            "name": "Doug's Feed and Seed",
+            "location": {
+                "address": {
+                    "addressLine": ["827 Oak ST"],
+                    "cityName": "Milo",
+                    "countrySubDivisionCode": [
+                        {
+                            "content": "IA",
+                            "typeCode": "State"
+                        },
+                        {
+                            "content": "Warrent",
+                            "typeCode": "County"
+                        }
+                    ],
+                    "countryCode": "US",
+                    "postalCode": "50166"
+                }
+            },
+            "classification": [
+                {
+                    "codeListValue": {
+                        "code": "VALID",
+                        "definition": "Elligible to receive transfers"
+                    }
+                }
+            ]
+        }
+    ]
+}

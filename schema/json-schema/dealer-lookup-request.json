@@ -1,0 +1,119 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "required" : [ "party" ],
+  "additionalProperties" : false,
+  "properties" : {
+    "party" : {
+      "type" : "array",
+      "items" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "id" : {
+            "description" : "The dealer's identifier. The value should be a GLN, an identifier assigned by the manufacturer (i.e., the manufacturer to whom the request is being sent),  or an AGIIS-EBID.",
+            "type" : "object",
+            "required" : [ "definition" ],
+            "additionalProperties" : false,
+            "properties" : {
+              "content" : {
+                "allOf" : [ {
+                  "$ref" : "#/definitions/normalizedString"
+                }, {
+                  "examples" : [ "1100012738782" ]
+                } ]
+              },
+              "schemeId" : {
+                "allOf" : [ {
+                  "$ref" : "#/definitions/token"
+                }, {
+                  "description" : "The type of identifier being used. The value should be one of \"GLN\", \"AssignedByManufacturer\",  or \"AGIIS-EBID\".",
+                  "examples" : [ "GLN" ]
+                } ]
+              }
+            }
+          },
+          "name" : {
+            "allOf" : [ {
+              "$ref" : "#/definitions/string"
+            }, {
+              "description" : "The Dealer's name",
+              "examples" : [ "UNITED COOPERATIVE" ]
+            } ]
+          },
+          "location" : {
+            "type" : "object",
+            "additionalProperties" : false,
+            "properties" : {
+              "address" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "addressLine" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/definitions/string"
+                    }
+                  },
+                  "cityName" : {
+                    "allOf" : [ {
+                      "$ref" : "#/definitions/string"
+                    }, {
+                      "description" : "Identifies the town or the city",
+                      "examples" : [ "Reedsburg" ]
+                    } ]
+                  },
+                  "countrySubDivisionCode" : {
+                    "description" : "The code (or name, if a code is not assigned) of a country subdivision. Examples include code/name of a state, province, territory, county, borough. The cardinality of is unbounded in this context to support specifying a state/province and a county/parish.",
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "required" : [ "definition" ],
+                      "additionalProperties" : false,
+                      "properties" : {
+                        "content" : {
+                          "allOf" : [ {
+                            "$ref" : "#/definitions/token"
+                          }, {
+                            "examples" : [ "WI" ]
+                          } ]
+                        },
+                        "typeCode" : {
+                          "allOf" : [ {
+                            "$ref" : "#/definitions/token"
+                          }, {
+                            "description" : "The type of country subdivision. In this context, use either \"state\" (for U.S. state or Canadian province) or \"county\" (for county or parish)."
+                          } ]
+                        }
+                      }
+                    }
+                  },
+                  "countryCode" : {
+                    "$ref" : "#/definitions/token"
+                  },
+                  "postalCode" : {
+                    "allOf" : [ {
+                      "$ref" : "#/definitions/normalizedString"
+                    }, {
+                      "description" : "Postal Code of the Address.",
+                      "examples" : [ "53959" ]
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "normalizedString" : {
+      "type" : "string"
+    },
+    "token" : {
+      "type" : "string"
+    },
+    "string" : {
+      "type" : "string"
+    }
+  }
+}

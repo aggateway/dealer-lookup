@@ -1,0 +1,180 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "required" : [ "party" ],
+  "additionalProperties" : false,
+  "properties" : {
+    "party" : {
+      "type" : "array",
+      "items" : {
+        "additionalProperties" : false,
+        "properties" : {
+          "id" : {
+            "description" : "The dealer's identifier. The value should be a GLN, an identifier assigned by the manufacturer (i.e., the manufacturer sending the response),  or an AGIIS-EBID.",
+            "type" : "object",
+            "required" : [ "definition" ],
+            "additionalProperties" : false,
+            "properties" : {
+              "content" : {
+                "allOf" : [ {
+                  "$ref" : "#/definitions/normalizedString"
+                }, {
+                  "examples" : [ "1100012738782" ]
+                } ]
+              },
+              "schemeId" : {
+                "allOf" : [ {
+                  "$ref" : "#/definitions/token"
+                }, {
+                  "description" : "The type of identifier being used. The value should be one of \"GLN\", \"AssignedByManufacturer\",  or \"AGIIS-EBID\".",
+                  "examples" : [ "GLN" ]
+                } ]
+              }
+            }
+          },
+          "name" : {
+            "allOf" : [ {
+              "$ref" : "#/definitions/string"
+            }, {
+              "description" : "The Dealer's name",
+              "examples" : [ "UNITED COOPERATIVE" ]
+            } ]
+          },
+          "location" : {
+            "description" : "The address of the dealer",
+            "type" : "object",
+            "additionalProperties" : false,
+            "properties" : {
+              "address" : {
+                "type" : "object",
+                "additionalProperties" : false,
+                "properties" : {
+                  "addressLine" : {
+                    "type" : "array",
+                    "items" : {
+                      "allOf" : [ {
+                        "$ref" : "#/definitions/string"
+                      }, {
+                        "examples" : [ "1360 LAUKANT ST" ]
+                      } ]
+                    }
+                  },
+                  "cityName" : {
+                    "allOf" : [ {
+                      "$ref" : "#/definitions/string"
+                    }, {
+                      "description" : "Identifies the town or the city",
+                      "examples" : [ "Reedsburg" ]
+                    } ]
+                  },
+                  "countrySubDivisionCode" : {
+                    "description" : "The code (or name, if a code is not assigned) of a country subdivision. Examples include code/name of a state, province, territory, county, borough.",
+                    "type" : "array",
+                    "items" : {
+                      "type" : "object",
+                      "required" : [ "definition" ],
+                      "additionalProperties" : false,
+                      "properties" : {
+                        "content" : {
+                          "allOf" : [ {
+                            "$ref" : "#/definitions/token"
+                          }, {
+                            "examples" : [ "WI" ]
+                          } ]
+                        },
+                        "typeCode" : {
+                          "allOf" : [ {
+                            "$ref" : "#/definitions/token"
+                          }, {
+                            "description" : "The type of country subdivision. In this context, use either \"state\" (for U.S. state or Canadian province) or \"county\" (for county or parish)."
+                          } ]
+                        }
+                      }
+                    }
+                  },
+                  "countryCode" : {
+                    "allOf" : [ {
+                      "$ref" : "#/definitions/token"
+                    }, {
+                      "description" : "Country in which the Address is in. A possible list of values is as specified in ISO 3166-2.",
+                      "examples" : [ "USA" ]
+                    } ]
+                  },
+                  "postalCode" : {
+                    "allOf" : [ {
+                      "$ref" : "#/definitions/normalizedString"
+                    }, {
+                      "description" : "Postal Code of the Address.",
+                      "examples" : [ "53959" ]
+                    } ]
+                  }
+                }
+              }
+            }
+          },
+          "classification" : {
+            "description" : "The manufacturer's classification of the dealer being looked up, including a code and optional definition and reason. Manufacturers may specify their own codes and definitions. The AgGateway Standards & Guidelines Committee suggests the following for the code (this list is stated again the context definition for \"code\"):\nVALID - The location is able to receive the transfer and possibly reference the agreement they have for the corresponding product\nNO_AGREEMENT - a location does not have the agreement with the manufacturer for the specified product\nOTHER - any other reason not specified",
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : false,
+              "properties" : {
+                "codeListValue" : {
+                  "description" : "See \"Classification\" context definition (parent). \"Code List Value\" contains the code and its optional definition.",
+                  "type" : "object",
+                  "required" : [ "code" ],
+                  "additionalProperties" : false,
+                  "properties" : {
+                    "code" : {
+                      "oneOf" : [ {
+                        "type" : "null"
+                      }, {
+                        "allOf" : [ {
+                          "$ref" : "#/definitions/normalizedString"
+                        }, {
+                          "description" : "Manufacturers may specify their own codes and definitions. The AgGateway Standards & Guidelines Committee suggests the following for the code:\nVALID - The location is able to receive the transfer and possibly reference the agreement they have for the corresponding product\nNO_AGREEMENT - a location does not have the agreement with the manufacturer for the specified product\nOTHER - any other reason not specified"
+                        } ]
+                      } ]
+                    },
+                    "definition" : {
+                      "oneOf" : [ {
+                        "type" : "null"
+                      }, {
+                        "allOf" : [ {
+                          "$ref" : "#/definitions/string"
+                        }, {
+                          "description" : "The definition associated with the specified classification code."
+                        } ]
+                      } ]
+                    }
+                  }
+                },
+                "reason" : {
+                  "oneOf" : [ {
+                    "type" : "null"
+                  }, {
+                    "allOf" : [ {
+                      "$ref" : "#/definitions/string"
+                    }, {
+                      "description" : "A reason for the specified classification."
+                    } ]
+                  } ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "normalizedString" : {
+      "type" : "string"
+    },
+    "token" : {
+      "type" : "string"
+    },
+    "string" : {
+      "type" : "string"
+    }
+  }
+}

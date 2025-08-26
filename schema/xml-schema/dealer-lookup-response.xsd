@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/10" targetNamespace="http://www.openapplications.org/oagis/10" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="Party">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.openapplications.org/oagis/10">An organization or individual that may or may not be authorized or licensed to sell a product in a given area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ID" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation source="http://www.openapplications.org/oagis/10">The dealer's identifier. The value should be a GLN, an identifier assigned by the manufacturer (i.e., the manufacturer sending the response),  or an AGIIS-EBID.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:normalizedString">
+								<xsd:attribute name="schemeID" use="optional" type="xsd:token">
+									<xsd:annotation>
+										<xsd:documentation source="http://www.openapplications.org/oagis/10">The type of identifier being used. The value should be one of "GLN", "AssignedByManufacturer",  or "AGIIS-EBID".</xsd:documentation>
+									</xsd:annotation>
+								</xsd:attribute>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Name" minOccurs="0" maxOccurs="1" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation source="http://www.openapplications.org/oagis/10">The Dealer's name</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element minOccurs="0" maxOccurs="1" name="Location">
+					<xsd:annotation>
+						<xsd:documentation source="http://www.openapplications.org/oagis/10">The address of the dealer</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element minOccurs="0" maxOccurs="1" name="Address">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="AddressLine" minOccurs="0" maxOccurs="unbounded" type="xsd:string" />
+										<xsd:element name="CityName" minOccurs="0" maxOccurs="1" type="xsd:string">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">Identifies the town or the city</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="CountrySubDivisionCode" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">The code (or name, if a code is not assigned) of a country subdivision. Examples include code/name of a state, province, territory, county, borough.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:token">
+														<xsd:attribute name="typeCode" use="optional" type="xsd:token">
+															<xsd:annotation>
+																<xsd:documentation source="http://www.openapplications.org/oagis/10">The type of country subdivision. In this context, use either "state" (for U.S. state or Canadian province) or "county" (for county or parish).</xsd:documentation>
+															</xsd:annotation>
+														</xsd:attribute>
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CountryCode" minOccurs="0" maxOccurs="1" type="xsd:token">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">Country in which the Address is in. A possible list of values is as specified in ISO 3166-2.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="PostalCode" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">Postal Code of the Address.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" name="Classification">
+					<xsd:annotation>
+						<xsd:documentation source="http://www.openapplications.org/oagis/10">The manufacturer's classification of the dealer being looked up, including a code and optional definition and reason. Manufacturers may specify their own codes and definitions. The AgGateway Standards &amp; Guidelines Committee suggests the following for the code (this list is stated again the context definition for "code"):
+VALID - The location is able to receive the transfer and possibly reference the agreement they have for the corresponding product
+NO_AGREEMENT - a location does not have the agreement with the manufacturer for the specified product
+OTHER - any other reason not specified</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element minOccurs="0" maxOccurs="1" name="CodeListValue">
+								<xsd:annotation>
+									<xsd:documentation source="http://www.openapplications.org/oagis/10">See "Classification" context definition (parent). "Code List Value" contains the code and its optional definition.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Code" nillable="true" minOccurs="1" maxOccurs="1" type="xsd:normalizedString">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">Manufacturers may specify their own codes and definitions. The AgGateway Standards &amp; Guidelines Committee suggests the following for the code:
+VALID - The location is able to receive the transfer and possibly reference the agreement they have for the corresponding product
+NO_AGREEMENT - a location does not have the agreement with the manufacturer for the specified product
+OTHER - any other reason not specified</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="Definition" nillable="true" minOccurs="0" maxOccurs="1" type="xsd:string">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">The definition associated with the specified classification code.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Reason" nillable="true" minOccurs="0" maxOccurs="1" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation source="http://www.openapplications.org/oagis/10">A reason for the specified classification.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/10" targetNamespace="http://www.openapplications.org/oagis/10" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="Party">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.openapplications.org/oagis/10">An organization or individual authorized or licensed to sell a product in a given area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ID" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation source="http://www.openapplications.org/oagis/10">The dealer's identifier. The value should be a GLN, an identifier assigned by the manufacturer (i.e., the manufacturer to whom the request is being sent),  or an AGIIS-EBID.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:normalizedString">
+								<xsd:attribute name="schemeID" use="optional" type="xsd:token">
+									<xsd:annotation>
+										<xsd:documentation source="http://www.openapplications.org/oagis/10">The type of identifier being used. The value should be one of "GLN", "AssignedByManufacturer",  or "AGIIS-EBID".</xsd:documentation>
+									</xsd:annotation>
+								</xsd:attribute>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Name" minOccurs="0" maxOccurs="1" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation source="http://www.openapplications.org/oagis/10">The Dealer's name</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element minOccurs="0" maxOccurs="1" name="Location">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element minOccurs="0" maxOccurs="1" name="Address">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="AddressLine" minOccurs="0" maxOccurs="unbounded" type="xsd:string" />
+										<xsd:element name="CityName" minOccurs="0" maxOccurs="1" type="xsd:string">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">Identifies the town or the city</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="CountrySubDivisionCode" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">The code (or name, if a code is not assigned) of a country subdivision. Examples include code/name of a state, province, territory, county, borough. The cardinality of is unbounded in this context to support specifying a state/province and a county/parish.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:token">
+														<xsd:attribute name="typeCode" use="optional" type="xsd:token">
+															<xsd:annotation>
+																<xsd:documentation source="http://www.openapplications.org/oagis/10">The type of country subdivision. In this context, use either "state" (for U.S. state or Canadian province) or "county" (for county or parish).</xsd:documentation>
+															</xsd:annotation>
+														</xsd:attribute>
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CountryCode" minOccurs="0" maxOccurs="1" type="xsd:token" />
+										<xsd:element name="PostalCode" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+											<xsd:annotation>
+												<xsd:documentation source="http://www.openapplications.org/oagis/10">Postal Code of the Address.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
